@@ -1,3 +1,4 @@
+import 'package:appdioteste/repository/nivel_repository.dart';
 import 'package:appdioteste/shared/widgets/text_label.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,17 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
   TextEditingController nomeController = TextEditingController(text: "");
   TextEditingController datanascController = TextEditingController(text: "");
   DateTime? dataNascimento;
+
+  var nivelRepository = NivelRepository();
+
+  var niveis = [];
+  var nivelSelecionado = "";
+
+  @override
+  void initState() {
+    niveis = nivelRepository.retornaNiveis();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +55,21 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                   }
               },
             ),
+            SizedBox(height: 10,),
+            const TextLabel(texto: "Nível de experiência"),
+            Column(children: niveis
+            .map((nivel) => RadioListTile(
+              title: Text(nivel.toString()),
+              selected: nivelSelecionado == nivel,
+              value: nivel.toString(), 
+              groupValue: nivelSelecionado,
+              onChanged: (value){
+                setState(() {
+                  print(value);
+                  nivelSelecionado = value.toString();
+                });
+              },
+              )).toList(),),
             TextButton(onPressed: (){
              print(nomeController.text);
              print(dataNascimento);
