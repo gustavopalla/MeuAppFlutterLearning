@@ -50,9 +50,9 @@ class _MainPageState extends State<MainPage> {
                 title: const Text('Dados Cadastrais'),
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const DadosCadastrais(text: "Meus Dados Cadastrais", dados: ["Nome", "Endereço"],)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const DadosCadastrais()));
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Dados Cadastrais selecionado')),
+                  const SnackBar(content: Text('Dados Cadastrais selecionado')),
                   );
                 },
               ),
