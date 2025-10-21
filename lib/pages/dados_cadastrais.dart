@@ -1,5 +1,7 @@
+import 'package:appdioteste/repository/linguagens_repository.dart';
 import 'package:appdioteste/repository/nivel_repository.dart';
 import 'package:appdioteste/shared/widgets/text_label.dart';
+import 'package:appdioteste/shared/widgets/text_label_salario.dart';
 import 'package:flutter/material.dart';
 
 class DadosCadastrais extends StatefulWidget {
@@ -15,13 +17,20 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
   DateTime? dataNascimento;
 
   var nivelRepository = NivelRepository();
+  var linguagensRepository = LinguagensRepository();
 
   var niveis = [];
   var nivelSelecionado = "";
 
+  var linguagens = [];
+  var linguagensSelecionadas = [];
+
+  double salarioEscolhido = 0;
+
   @override
   void initState() {
     niveis = nivelRepository.retornaNiveis();
+    linguagens = linguagensRepository.retornaLinguagens();
     super.initState();
   }
 
@@ -33,8 +42,7 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             TextLabel(texto: "Nome"),
             TextField(
@@ -70,12 +78,42 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                 });
               },
               )).toList(),),
+
+            const TextLabel(texto: "Linguagens Preferidas"),
+
+            Column(children: linguagens.map((linguagem) => CheckboxListTile(
+              title: Text(linguagem),
+              value: linguagensSelecionadas.contains(linguagem), 
+              onChanged: (bool? value){
+                if(value!){
+                  setState(() {
+                    linguagensSelecionadas.add(linguagem);
+                  });
+                } else{
+                  setState(() {
+                    linguagensSelecionadas.remove(linguagem);
+                  });
+                }
+              })
+              ).toList(),),
+
+            TextLabel(texto: "Pretenção Salarial"),
+            TextLabelSalario(texto: "R\$ ${salarioEscolhido.round().toString()}"),
+            Slider(
+            min: 0,
+            max: 100000,
+            value: salarioEscolhido,
+            onChanged: (double value){
+              setState(() {
+                salarioEscolhido = value;
+              });
+            }),
+
             TextButton(onPressed: (){
              print(nomeController.text);
              print(dataNascimento);
             }, 
             child: Text("Salvar"))
-
           ],
         ),
       ),
