@@ -2,6 +2,7 @@ import 'package:appdioteste/pages/dados_cadastrais.dart';
 import 'package:appdioteste/pages/pagina1.dart';
 import 'package:appdioteste/pages/pagina2.dart';
 import 'package:appdioteste/pages/pagina3.dart';
+import 'package:appdioteste/shared/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -19,7 +20,7 @@ class _MainPageState extends State<MainPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: const Text("Main Page")),
-        drawer: Drawer(
+        drawer: CustomDrawer(
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
