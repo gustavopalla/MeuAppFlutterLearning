@@ -1,4 +1,5 @@
 import 'package:appdioteste/pages/dados_cadastrais.dart';
+import 'package:appdioteste/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -76,6 +77,39 @@ class CustomDrawer extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Dados Cadastrais selecionado')),
                   );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.exit_to_app),
+                title: const Text('Sair'),
+                onTap: () {
+                  showDialog(context: context, builder: (BuildContext bc){
+                    return AlertDialog(
+                      alignment: Alignment.centerLeft,
+                      elevation: 8,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                      title: Text("Meu app"),
+                      content: Wrap(
+                        children: [
+                          Text("Deseja realmente sair do App?"),
+                        ],
+                      ),
+                      actions: [
+                        TextButton(onPressed: (){
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                        }, 
+                        child: const Text("Sim")
+                        ),
+                        TextButton(onPressed: (){
+                          Navigator.pop(context);
+                        }, 
+                        child: const Text("Não")
+                        )
+                      ],
+                    );
+                  });
                 },
               ),
             ],

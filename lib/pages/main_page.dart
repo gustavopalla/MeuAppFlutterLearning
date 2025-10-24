@@ -1,5 +1,5 @@
 import 'package:appdioteste/pages/dados_cadastrais.dart';
-import 'package:appdioteste/pages/pagina1.dart';
+import 'package:appdioteste/pages/card_page.dart';
 import 'package:appdioteste/pages/pagina2.dart';
 import 'package:appdioteste/pages/pagina3.dart';
 import 'package:appdioteste/shared/custom_drawer.dart';
@@ -68,7 +68,14 @@ class _MainPageState extends State<MainPage> {
             });
           },
           children: [
-            Pagina1(),
+            CardPage(
+              nome: "João Silva",
+              dataNascimento: DateTime(1990, 5, 12),
+              nivel: "Sênior",
+              linguagens: ["Dart", "Flutter"],
+              salario: 8000,
+              tempoExperiencia: 5,
+            ),
             Pagina2(),
             Pagina3(),
           ],
