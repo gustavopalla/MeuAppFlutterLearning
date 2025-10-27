@@ -1,7 +1,7 @@
 import 'package:appdioteste/pages/dados_cadastrais.dart';
 import 'package:appdioteste/pages/card_page.dart';
-import 'package:appdioteste/pages/pagina2.dart';
 import 'package:appdioteste/pages/pagina3.dart';
+import 'package:appdioteste/pages/tarefa_page.dart';
 import 'package:appdioteste/shared/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -76,7 +76,7 @@ class _MainPageState extends State<MainPage> {
               salario: 8000,
               tempoExperiencia: 5,
             ),
-            Pagina2(),
+            TarefaPage(),
             Pagina3(),
           ],
         ),
@@ -90,13 +90,13 @@ class _MainPageState extends State<MainPage> {
               icon: Icon(Icons.home),
             ),
             BottomNavigationBarItem(
-              label: "Pag2",
-              icon: Icon(Icons.add),
+              label: "Tarefas",
+              icon: Icon(Icons.list),
             ),
             BottomNavigationBarItem(
               label: "Pag3",
               icon: Icon(Icons.settings),
-            )
+            ),
         ]),
       ),
     );

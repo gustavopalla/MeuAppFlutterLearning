@@ -41,7 +41,7 @@ class _CardPageState extends State<CardPage> {
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 6),
                       child: Text(
-                        "👤 Nome: ${widget.nome}",
+                        "Nome: ${widget.nome}",
                         style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
@@ -49,35 +49,35 @@ class _CardPageState extends State<CardPage> {
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 6),
                       child: Text(
-                        "🎂 Nascimento: ${widget.dataNascimento.toLocal().toString().split(' ')[0]}",
+                        "Nascimento: ${widget.dataNascimento.toLocal().toString().split(' ')[0]}",
                         style: const TextStyle(fontSize: 16),
                       ),
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 6),
                       child: Text(
-                        "💼 Nível: ${widget.nivel}",
+                        "Nível: ${widget.nivel}",
                         style: const TextStyle(fontSize: 16),
                       ),
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 6),
                       child: Text(
-                        "💻 Linguagens: ${widget.linguagens.join(', ')}",
+                        "Linguagens: ${widget.linguagens.join(', ')}",
                         style: const TextStyle(fontSize: 16),
                       ),
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 6),
                       child: Text(
-                        "⏳ Experiência: ${widget.tempoExperiencia} anos",
+                        "Experiência: ${widget.tempoExperiencia} anos",
                         style: const TextStyle(fontSize: 16),
                       ),
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 6),
                       child: Text(
-                        "💰 Pretensão Salarial: R\$ ${widget.salario}",
+                        "Pretensão Salarial: R\$ ${widget.salario}",
                         style: const TextStyle(fontSize: 16),
                       ),
                     ),
