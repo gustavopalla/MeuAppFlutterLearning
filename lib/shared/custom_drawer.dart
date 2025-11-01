@@ -1,5 +1,6 @@
 import 'package:appdioteste/pages/dados_cadastrais.dart';
 import 'package:appdioteste/pages/login_page.dart';
+import 'package:appdioteste/pages/numeros_aleatorios_page.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -76,6 +77,17 @@ class CustomDrawer extends StatelessWidget {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const DadosCadastrais()));
                   ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Dados Cadastrais selecionado')),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.confirmation_number),
+                title: const Text('Gerador de Números Aleatórios'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const NumerosAleatoriosPage()));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Gerador de Números Aleatórios selecionado')),
                   );
                 },
               ),
