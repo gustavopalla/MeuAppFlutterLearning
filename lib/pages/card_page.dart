@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CardPage extends StatefulWidget {
   final String nome;
+  final double altura;
   final DateTime dataNascimento;
   final String nivel;
   final List<String> linguagens;
@@ -16,6 +18,7 @@ class CardPage extends StatefulWidget {
     required this.linguagens,
     required this.salario,
     required this.tempoExperiencia,
+    required this.altura,
   });
 
   @override
@@ -23,6 +26,30 @@ class CardPage extends StatefulWidget {
 }
 
 class _CardPageState extends State<CardPage> {
+
+  String nomeUsuario = 'João Silva';
+  double alturaUsuario = 0.0;
+
+  final String chave_nome_usuario = 'chave_nome_usuario';
+  final String chave_altura = 'chave_altura';
+
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserConfig();
+  }
+
+  Future<void> _loadUserConfig() async {
+    final storage = await SharedPreferences.getInstance();
+    setState(() {
+      nomeUsuario = storage.getString(chave_nome_usuario) ?? 'Usuário Padrão';
+      alturaUsuario = storage.getDouble(chave_altura) ?? 0.0;
+      _isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -42,6 +69,14 @@ class _CardPageState extends State<CardPage> {
                       margin: const EdgeInsets.symmetric(vertical: 6),
                       child: Text(
                         "Nome: ${widget.nome}",
+                        style: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 6),
+                      child: Text(
+                        "Altura: ${widget.altura}",
                         style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),

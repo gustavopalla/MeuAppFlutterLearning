@@ -1,9 +1,10 @@
-import 'package:appdioteste/pages/dados_cadastrais.dart';
+import 'package:appdioteste/classes/configuracoes_usuarios.dart';
 import 'package:appdioteste/pages/card_page.dart';
 import 'package:appdioteste/pages/pagina3.dart';
 import 'package:appdioteste/pages/tarefa_page.dart';
 import 'package:appdioteste/shared/custom_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -13,8 +14,40 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
+  ConfiguracoesUsuario? usuarioConfig;
+
   PageController controller = PageController(initialPage: 0);
   int posicaoPagina = 0;
+
+  final chave_nome_usuario = 'chave_nome_usuario';
+  final chave_altura = 'chave_altura';
+  final chave_receber_notificacao = 'chave_receber_notificacao';
+  final chave_tema_escuro = 'chave_tema_escuro';
+
+  @override
+  void initState() {
+    super.initState();
+    _carregarConfiguracoes();
+  }
+
+  _carregarConfiguracoes() async {
+    final storage = await SharedPreferences.getInstance();
+
+    final nome = storage.getString(chave_nome_usuario) ?? 'Usuário Padrão';
+    final altura = storage.getDouble(chave_altura) ?? 0.0;
+    final receberNotificacao = storage.getBool(chave_receber_notificacao) ?? false;
+    final temaEscuro = storage.getBool(chave_tema_escuro) ?? false;
+    setState(() {
+      usuarioConfig = ConfiguracoesUsuario(
+        nome: nome,
+        altura: altura,
+        receberNotificacao: receberNotificacao,
+        temaEscuro: temaEscuro,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -46,17 +79,6 @@ class _MainPageState extends State<MainPage> {
                   );
                 },
               ),
-              ListTile(
-                leading: const Icon(Icons.data_usage),
-                title: const Text('Dados Cadastrais'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const DadosCadastrais()));
-                  ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Dados Cadastrais selecionado')),
-                  );
-                },
-              ),
             ],
           ),
         ),
@@ -69,8 +91,9 @@ class _MainPageState extends State<MainPage> {
           },
           children: [
             CardPage(
-              nome: "João Silva",
+              nome: usuarioConfig?.nome ?? "Nome Padrão",
               dataNascimento: DateTime(1990, 5, 12),
+              altura: usuarioConfig?.altura ?? 170.0,
               nivel: "Sênior",
               linguagens: ["Dart", "Flutter"],
               salario: 8000,
